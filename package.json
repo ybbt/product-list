@@ -39,6 +39,5 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "https://ybbt.github.io/product-list",
-  "deploy": "npm run build&&gh-pages -d build"
+  "homepage": "https://ybbt.github.io/product-list"
 }
