@@ -1,0 +1,52 @@
+.display {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+
+.goodsCard {
+    width: 400px;
+    background-color:silver;
+    border: 1px solid grey;
+    border-radius: 10px;
+    color: darkslategray;
+    padding: 10px;
+    padding-bottom: 20px;
+}
+
+.header{
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    justify-content: flex-end;
+    box-sizing: border-box;
+}
+
+.listName{
+    font-size: 25px;
+}
+
+.clearCart{
+    height: 25px;
+    display: flex;
+    justify-content: flex-end;
+    margin: 15px 5px 0 5px;
+}
+
+.button{
+    border: 1px solid maroon;
+    border-radius: 3px;
+    background-color:rgb(247, 207, 192);
+    color:darkred;
+}
+
+.button:hover{
+    background-color:rgb(163, 122, 108);
+    color:lightgrey;
+}
+
+.button:active{
+    background-color:darkred;
+    color:lightgrey;
+}

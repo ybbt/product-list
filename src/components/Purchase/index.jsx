@@ -14,9 +14,9 @@ class Purchase extends React.Component {
             <React.Fragment>
                 <td>{name}</td>
                 <td>{amount}</td>
-                <td>{price}</td>
+                <td>{`${price} $`}</td>
                 <td>
-                    {discount !== undefined ? this.calculationTotalPrice(price, discount, discountAmount, amount): price*amount}
+                    {`${discount !== undefined ? this.calculationTotalPrice(price, discount, discountAmount, amount): price*amount} $`}
                 </td>
             </React.Fragment>
 

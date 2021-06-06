@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Product from '../Product'
 
-// import style from './style.module.css';
+import style from './style.module.css';
 
 export class ProductList extends Component {
 
@@ -10,12 +10,13 @@ export class ProductList extends Component {
     }
 
     render() {
-        // console.log(this.props.goods[0]);
         return (
-            <div>
+            <div className={style.list}>
                 {this.props.goods.map((item, index) => {
+                    let searchIndex = this.props.purchases.findIndex(stateItem => stateItem.id === item.id);
+                    let purchase = searchIndex !== -1 ? this.props.purchases[searchIndex] : null;
                     return (
-                        <Product item={item} key={item.id} onAmountChange={this.handleAmountChange}/>
+                        <Product item={item} key={item.id} purchase={purchase} onAmountChange={this.handleAmountChange}/>
                     )
                 })}
             </div>

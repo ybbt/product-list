@@ -1,0 +1,48 @@
+.product{
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 3px;
+    padding-top: 7px;
+    font-size: 15px;
+    border-bottom: 1px dotted darkslategrey;
+}
+
+.name{
+    display: flex;
+    justify-content: flex-start;
+    flex-basis: 170px;
+    padding-left: 10px;
+}
+.price{
+    flex-basis: 60px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-right: 5px;
+}
+
+.input{
+    box-sizing: border-box;
+    width: 60px;
+    flex-shrink: 0;
+    font-size: inherit;
+    outline: 0;
+}
+
+.button{
+    flex-basis: 60px;
+    border-radius: 3px;
+    background-color: lightskyblue;
+    border: 1px solid darkcyan;
+    color:darkslategray;
+}
+
+.button:hover{
+    background-color:steelblue;
+    color:whitesmoke;
+}
+
+.button:active{
+    background-color:darkturquoise;
+    color:whitesmoke;
+}
