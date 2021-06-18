@@ -1,7 +1,7 @@
 table{
     margin-bottom: 30px;
-    border-collapse: separate;
-    border-spacing: 30px 0;
+    /* border-collapse: separate; */
+    border-spacing: 30px 5px;
 }
 
 th {
@@ -17,6 +17,12 @@ td {
     padding: 12px 2px;
 }
 
+tbody tr:last-child td{
+    border: 0;
+    border-top: 2px solid #6678b1;
+    font-weight: bold;
+}
+
 .cart{
     display: flex;
     flex-direction: column;
@@ -27,4 +33,18 @@ td {
 .name{
     font-size: 25px;
     color: rgb(10, 36, 87);
+}
+
+.buttonClearCart{
+    border: 2px solid #6678b1;
+    background-color: white;
+    margin: 20px;
+    padding: 5px;
+    color: #039;
+}
+
+.buttonClearCart:active{
+    color: white;
+    background-color: grey;
+    
 }

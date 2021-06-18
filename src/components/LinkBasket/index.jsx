@@ -6,21 +6,19 @@ import basket from './basket.png';
 
 import style from './style.module.css'
 
-class LinkBasket extends React.Component {
+function LinkBasket(props) {
 
+    return (
+        <Link to={{pathname:'/cart', purchases: props.purchases}} className={style.link}>
+            <div className={style.amount}>
+                <span className={style.amountElement}>
+                    {props.purchases.length}
+                </span>
+            </div>
+            <img src={basket} alt = "basket" className={style.icon}/>
+        </Link>
+    );
 
-    render() {
-        return (
-            <Link to={{pathname:'/cart', purchases: this.props.purchases}} className={style.link}>
-                <div className={style.amount}>
-                    <span className={style.amountElement}>
-                        {this.props.purchases.length}
-                    </span>
-                </div>
-                <img src={basket} alt = "basket" className={style.icon}/>
-            </Link>
-        );
-    }
 }
 
 export default LinkBasket;

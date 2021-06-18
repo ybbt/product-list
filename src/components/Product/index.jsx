@@ -1,35 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import style from './style.module.css'
 
-class Product extends React.Component {
+function Product (props) {
 
-    constructor(props) {
-        super(props);
-        this.state = {inputValue: props.purchase ? props.purchase.amount : 0};
+    const [inputValue, setInputValue] = useState(props.purchase ? props.purchase.amount : 0);
+
+    function handleChange(e) {
+        setInputValue(e.target.value);
     }
 
-    handleChange = (e) => {
-        this.setState({inputValue: e.target.value});
-    }
-
-    handleClick = () => {
+    function handleClick() {
         let item = {};
-        Object.assign(item, this.props.item);
-        item.amount = +this.state.inputValue;
-        this.props.onAmountChange(item);
+        Object.assign(item, props.item);
+        item.amount = +inputValue;
+        props.onAmountChange(item);
     }
 
-    render() {
-        return (
-            <div key={this.props.item.id} className={style.product}>
-                <span className={style.name}>{this.props.item.name}</span>
-                <span className={style.price}>{`${this.props.item.price} $`}</span>
-                <input type="number" min="0" value={this.state.inputValue} onChange={this.handleChange} className={style.input}/>
-                <button onClick={this.handleClick} className={style.button}>Додати</button>
-            </div>
-        );
-    }
+
+    return (
+        <div key={props.item.id} className={style.product}>
+            <span className={style.name}>{props.item.name}</span>
+            <span className={style.price}>{`${props.item.price} $`}</span>
+            <input type="number" min="0" value={inputValue} onChange={handleChange} className={style.input}/>
+            <button onClick={handleClick} className={style.button}>Додати</button>
+        </div>
+    );
+
 }
 
 export default Product;

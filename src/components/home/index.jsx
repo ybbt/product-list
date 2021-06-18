@@ -1,83 +1,84 @@
-import React from 'react';
+import React, {useState} from 'react';
 import ProductList from '../ProductList';
 import LinkBasket from '../LinkBasket';
 
 import style from './style.module.css'
 
-class Home extends React.Component {
+function Home(props) {
 
-    constructor(props) {
-        super(props);
-        let goods = [
+    let goodsList = [
                 {id: 1, name: "Банан", price: 10},
                 {id: 2, name: "Яблоко", price: 8},
                 {id: 3, name: "Папайя", price: 10, discount: 5, discountAmount: 3}
             ];
-        let purchases = (props.location.purchases || []);
-        this.state = {
-            goods,
-            purchases,
-            keyOfList : 1
-        };
+
+    let purchasesList = (props.location.purchases || []);
+
+    const [goods] = useState(goodsList);
+    const [purchases, setPurchases] = useState(purchasesList);
+    const [keyOfList, setKeyOfLists] = useState(1);
+
+
+    function handleClearCart() {
+        setPurchases([]);
+        setKeyOfLists(keyOfList + 1);
     }
 
-    handleClearCart = () => {
-        let {keyOfList} = this.state;
-        this.setState(
-            {
-                purchases : [],
-                keyOfList : ++keyOfList
-            }
-        )
-    }
-
-    handleAmountChange = (item) => {
-        this.setState(function(state, props) {
-            let purchases = [];
-            Object.assign(purchases, state.purchases);
-            if(purchases.length > 0){
-                let index = purchases.findIndex(stateItem => stateItem.id === item.id);
-                if (index !== -1) {
-                    if (item.amount !== 0) {
-                        purchases[index] = item;
-                    } else {
-                        purchases.splice(index, 1);
-                    }
+    function changePurchases(item) {
+        let purchasesList = [];
+        Object.assign(purchasesList, purchases);
+        if(purchasesList.length > 0){
+            let index = purchasesList.findIndex(stateItem => stateItem.id === item.id);
+            if (index !== -1) {
+                if (item.amount !== 0) {
+                    purchasesList[index] = item;
                 } else {
-                    if (item.amount !== 0) {
-                        purchases.push(item);
-                    }
+                    purchasesList.splice(index, 1);
                 }
             } else {
-                if(item.amount !== 0) purchases.push(item);
-            };
+                if (item.amount !== 0) {
+                    purchasesList.push(item);
+                }
+            }
+        } else {
+            if(item.amount !== 0) purchasesList.push(item);
+        };
+        return purchasesList;
+    };
 
-            return {
-                purchases: purchases
-            };
-        });
+    function calculationTotalPrice(item){
+        let {price, discount, discountAmount, amount} = item;
+        let totalPrice = price * amount;
+        if (discount !== undefined) {
+            totalPrice = totalPrice - discount * Math.floor(amount/discountAmount)
+        }
+        return totalPrice;
     }
 
-    render() {
-        return (
-            <div className={style.display}>
-                <div className={style.goodsCard}>
-                    <header className={style.header}>
-                        <LinkBasket purchases={this.state.purchases} />
-                    </header>
-                    <main >
-                        <h1 className={style.listName}>Перелік товарів</h1>
-                        <div >
-                            <ProductList key={this.state.keyOfList} goods={this.state.goods} purchases={this.state.purchases} onAmountChange={this.handleAmountChange} />
-                            <div className={style.clearCart}>
-                                <button className={style.button} onClick={this.handleClearCart}>Очистити кошик</button>
-                            </div>
+    function handleAmountChange(item) {
+        item.totalPrice = calculationTotalPrice(item);
+        setPurchases(changePurchases(item));
+    }
+
+    return (
+        <div className={style.display}>
+            <div className={style.goodsCard}>
+                <header className={style.header}>
+                    <LinkBasket purchases={purchases}/>
+                </header>
+                <main >
+                    <h1 className={style.listName}>Перелік товарів</h1>
+                    <div >
+                        <ProductList key={keyOfList} goods={goods} purchases={purchases} onAmountChange={handleAmountChange} />
+                        <div className={style.clearCart}>
+                            <button className={style.button} onClick={handleClearCart}>Очистити кошик</button>
                         </div>
-                    </main>
-                </div>
+                    </div>
+                </main>
             </div>
-        );
-    }
+        </div>
+    );
+
 }
 
 export default Home;
